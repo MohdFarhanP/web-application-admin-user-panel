@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/styles/userlogin.css">
+
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <form action="loginBtn" method="post" id="loginform">
+        <h3>Login Here</h3>
+
+        <p id="message" hidden>{{message}}</p>
+        <p id="msg" hidden>{{msg}}</p>
+
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="username" id="username">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password" id="password">
+
+        <button type="submit">Log In</button>
+       
+    </form>
+
+<script>
+     document.getElementById('loginform').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        let accept = formValidate();
+        if (accept) {
+            return event.target.submit();
+        }
+    });
+
+
+    function formValidate() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+      
+  
+
+        if (username == '' || password == '') {
+            Swal.fire('All field are required');
+            return false;
+        }
+        return true;
+    }
+    const msg = document.getElementById('message').textContent;
+    const message = document.getElementById('msg').textContent;
+
+    if(msg){
+        Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: msg,
+  showConfirmButton: false,
+  timer: 1500
+});
+    }
+    if(message){
+        Swal.fire({
+  position: "top-end",
+  title: message,
+  timer: 1500
+});
+    }
+</script>

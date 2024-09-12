@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/styles/userlogin.css">
+
+<form action="signupBtn" method="post" id="signform">
+    <h3>Login Here</h3>
+    <p id="message" hidden>{{message}}</p>
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" id="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password" autocomplete="new-password" id="password">
+
+    <label for="password">Conform Password</label>
+    <input type="password" name="cpassword" placeholder="Conform Password" id="cpassword">
+
+    <button type="submit">Sign up</button>
+
+</form>
+<script>
+
+    document.getElementById('signform').addEventListener('submit', (event) => {
+        event.preventDefault();
+        let accept = formValidate();
+        if (accept) {
+            return event.target.submit();
+        }
+    });
+    const msg = document.getElementById('message').textContent;
+    if (msg) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: msg,
+            
+        });
+    }
+    function formValidate() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+        let cpassword = document.getElementById('cpassword').value;
+
+        if (username == '' || password == '' || cpassword == '') {
+            Swal.fire('All field are required');
+            return false;
+        } else if (password != cpassword) {
+            Swal.fire('Password is not match');
+            return false;
+        }
+        return true;
+    }
+</script>
